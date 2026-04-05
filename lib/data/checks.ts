@@ -659,3 +659,127 @@ const payoutChecks: DealCheck[] = [
     ],
   },
 ]
+
+// ─── Accounts checks ─────────────────────────────────────────────────────────
+// Source documents: Purchase Invoice, Funds Form, Giro Slip
+
+const accountsChecks: DealCheck[] = [
+  {
+    id: "AC-CHK-001",
+    category: "intra_doc",
+    title: "Invoice line items arithmetic",
+    description: "Arithmetic check: invoice line items must sum to stated total. Same check as payout — accounts team verifies independently.",
+    matchType: "arithmetic",
+    status: "pass",
+    confidence: 0.99,
+    outcome: "Invoice arithmetic confirmed: £14,000 + £295 + £150 = £14,445.",
+    dataRows: [
+      { field: "Vehicle price", sourceA: "£14,000", sourceB: "Purchase Invoice", match: true },
+      { field: "Administration fee", sourceA: "£295", sourceB: "Purchase Invoice", match: true },
+      { field: "Delivery charge", sourceA: "£150", sourceB: "Purchase Invoice", match: true },
+      { field: "Stated total", sourceA: "£14,445", sourceB: "Purchase Invoice", match: true },
+    ],
+    documents: [
+      { id: "DOC-AC-01", name: "Purchase Invoice (MCD-2026-0892)", version: "v1", type: "upload" },
+    ],
+  },
+  {
+    id: "AC-CHK-002",
+    category: "intra_doc",
+    title: "VAT calculation",
+    description: "Arithmetic check: if VAT is applicable, VAT amount must equal net × VAT rate. Not applicable for this deal.",
+    matchType: "arithmetic",
+    status: "pass",
+    confidence: 0.99,
+    outcome: "VAT not applicable for this deal (private sale, non-VAT-registered vehicle). Check not triggered.",
+    dataRows: [
+      { field: "VAT applicable", sourceA: "false", sourceB: "Purchase Invoice", match: true },
+    ],
+    documents: [
+      { id: "DOC-AC-01", name: "Purchase Invoice (MCD-2026-0892)", version: "v1", type: "upload" },
+    ],
+  },
+  {
+    id: "AC-CHK-003",
+    category: "system_lookup",
+    title: "Sort code / account verification",
+    description: "System lookup: sort code and account number must be verified by bank verification service. Cannot verify when sort code is inconsistent across documents.",
+    matchType: "lookup",
+    status: "fail",
+    confidence: 0.99,
+    outcome: "Bank verification cannot proceed. Sort code is inconsistent between giro slip (204518) and funds form (204519). Must be resolved by payout before accounts can verify.",
+    failReason: "Prerequisite unresolved: sort code mismatch from payout stage (giro 20-45-18 vs funds form 20-45-19). Accounts cannot run bank verification until payout resolves which sort code is correct.",
+    dataRows: [
+      { field: "Giro slip sort code", sourceA: "204518", sourceB: "Giro Slip", match: false },
+      { field: "Funds form sort code", sourceA: "204519", sourceB: "Funds Form", match: false, note: "Cannot determine correct value" },
+      { field: "Account number", sourceA: "41839205", sourceB: "Both documents", match: true },
+      { field: "Bank verification", sourceA: "Blocked", sourceB: "Bank Verification Service", match: false },
+    ],
+    documents: [
+      { id: "DOC-AC-02", name: "Funds Form", version: "v1", type: "upload" },
+      { id: "DOC-AC-03", name: "Giro Slip", version: "v1", type: "upload" },
+    ],
+  },
+  {
+    id: "AC-CHK-004",
+    category: "inter_doc",
+    title: "Customer details — invoice vs HP agreement",
+    description: "Fuzzy match customer name and address between purchase invoice and HP agreement.",
+    matchType: "fuzzy",
+    status: "pass",
+    confidence: 0.93,
+    outcome: "Customer identity confirmed. 'A J Piers' (invoice) matches 'Adam James Piers' (HP agreement) via fuzzy match. Address uses 'Birchwood Ln' on invoice vs 'Birchwood Lane' on HP agreement — same property.",
+    dataRows: [
+      { field: "Name — Invoice", sourceA: "A J Piers", sourceB: "Purchase Invoice", match: true },
+      { field: "Name — HP agreement", sourceA: "Adam James Piers", sourceB: "HP Agreement", match: true, note: "Initials vs full name — fuzzy match pass" },
+      { field: "Address — Invoice", sourceA: "14 Birchwood Ln, Solihull, B91 3QR", sourceB: "Purchase Invoice", match: true },
+      { field: "Address — HP agreement", sourceA: "14 Birchwood Lane, Solihull, B91 3QR", sourceB: "HP Agreement", match: true, note: "'Ln' vs 'Lane' — fuzzy match pass" },
+    ],
+    documents: [
+      { id: "DOC-AC-01", name: "Purchase Invoice (MCD-2026-0892)", version: "v1", type: "upload" },
+      { id: "DOC-PO-01", name: "HP Agreement", version: "v1", type: "upload" },
+    ],
+  },
+  {
+    id: "AC-CHK-005",
+    category: "inter_doc",
+    title: "Bank details — funds form vs giro slip",
+    description: "Exact match bank account number between funds form and giro slip. Sort code is checked separately.",
+    matchType: "exact",
+    status: "fail",
+    confidence: 0.99,
+    outcome: "Account number matches (41839205) but sort code is inconsistent. See AC-CHK-003.",
+    failReason: "Sort code mismatch between funds form (204519) and giro slip (204518). Account number is consistent but cannot confirm bank details until sort code is resolved.",
+    dataRows: [
+      { field: "Account number — Funds form", sourceA: "41839205", sourceB: "Funds Form", match: true },
+      { field: "Account number — Giro slip", sourceA: "41839205", sourceB: "Giro Slip", match: true },
+      { field: "Sort code — Funds form", sourceA: "204519", sourceB: "Funds Form", match: false },
+      { field: "Sort code — Giro slip", sourceA: "204518", sourceB: "Giro Slip", match: false, note: "One digit differs" },
+    ],
+    documents: [
+      { id: "DOC-AC-02", name: "Funds Form", version: "v1", type: "upload" },
+      { id: "DOC-AC-03", name: "Giro Slip", version: "v1", type: "upload" },
+    ],
+  },
+]
+
+// ─── Exports ──────────────────────────────────────────────────────────────────
+
+const stageChecksMap: Record<string, DealCheck[]> = {
+  underwriting: underwritingChecks,
+  payout: payoutChecks,
+  accounts: accountsChecks,
+}
+
+export function getChecksForStage(stageId: string): DealCheck[] {
+  return stageChecksMap[stageId] ?? []
+}
+
+export function getChecksByCategory(checks: DealCheck[]): Record<CheckCategory, DealCheck[]> {
+  const grouped: Partial<Record<CheckCategory, DealCheck[]>> = {}
+  for (const check of checks) {
+    if (!grouped[check.category]) grouped[check.category] = []
+    grouped[check.category]!.push(check)
+  }
+  return grouped as Record<CheckCategory, DealCheck[]>
+}
