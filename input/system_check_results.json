@@ -1,0 +1,16 @@
+{
+  "document": "System Check Results",
+  "application_reference": "AF-2026-00417",
+  "date_run": "20/03/2026",
+  "gold_check": {
+    "status": "Complete",
+    "docket_number": "GC-29481",
+    "result": "No issues flagged"
+  },
+  "hpi_vehicle_finance_check": {
+    "registration": "WR21 XYZ",
+    "outstanding_finance": "None",
+    "status": "Clear",
+    "result": "Clear"
+  }
+}

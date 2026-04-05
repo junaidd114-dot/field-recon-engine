@@ -1,0 +1,10 @@
+{
+  "document": "Funds Form",
+  "dealer": "Midland Motor Group",
+  "date": "19/03/2026",
+  "application_reference": "AF-2026-00417",
+  "payment_details": {
+    "sort_code": "204519",
+    "account_number": "41839205"
+  }
+}

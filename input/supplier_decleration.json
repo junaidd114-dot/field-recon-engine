@@ -1,0 +1,20 @@
+{
+  "document": "Supplier Declaration",
+  "dealer": "Midland Motor Group Ltd",
+  "date_signed": "19/03/2026",
+  "dealer_details": {
+    "registered_name": "Midland Motor Group Ltd",
+    "address": "Unit 4 Cranmore Ind Est, Shirley, B90 4LF",
+    "fca_reference_number": "123456"
+  },
+  "declaration": {
+    "signed_by": "J. Harrison, Director",
+    "date": "19/03/2026",
+    "confirmations": [
+      "The vehicle described in this transaction is owned by the above-named company",
+      "The information provided in connection with this finance application is true and accurate",
+      "The dealer holds the appropriate FCA permissions for credit brokerage activity",
+      "All documents have been completed without alteration"
+    ]
+  }
+}

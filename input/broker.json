@@ -1,0 +1,40 @@
+{
+  "document": "Broker Application",
+  "source": "CarMoney (via CRM)",
+  "date_submitted": "18/03/2026",
+  "application_reference": "AF-2026-00417",
+  "customer_details": {
+    "first_name": "Adam",
+    "surname": "Piers",
+    "date_of_birth": "15/03/1988",
+    "address": "14 Birchwood Lane, Solihull, B91 3QR",
+    "employment_status": "Full-time",
+    "time_at_current_employer": "3 years"
+  },
+  "vehicle_details": {
+    "make_model": "Ford Focus ST-Line",
+    "year": "2021",
+    "registration": "WR21XYZ",
+    "mileage": "27,000"
+  },
+  "financial_details": {
+    "cash_price": "£14,000",
+    "deposit": "£1,500",
+    "amount_to_finance": "£12,500",
+    "monthly_payment": "£287.43",
+    "total_amount_payable": "£17,245.80",
+    "apr": "9.9%",
+    "glasses_guide_retail_estimated": "£14,200"
+  },
+  "previous_application": {
+    "reference": "AF-2024-08831",
+    "approved": "January 2025",
+    "details": {
+      "name": "Adam J Piers",
+      "date_of_birth": "15/03/1988",
+      "address": "14 Birchwood Lane, Solihull B91 3QR",
+      "employment_status": "Full-time",
+      "time_at_current_employer": "2 years"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "document": "FCA Register Lookup",
+  "lookup_date": "20/03/2026",
+  "query": "FCA reference 123456",
+  "result": {
+    "fca_reference": "123456",
+    "firm_name": "Midland Motor Group Ltd",
+    "trading_names": ["Midland Cars Direct"],
+    "status": "Authorised",
+    "permission": "Credit brokerage",
+    "registered_address": "Unit 4, Cranmore Industrial Estate, Shirley, Solihull, B90 4LF"
+  }
+}

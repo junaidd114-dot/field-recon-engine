@@ -1,0 +1,14 @@
+{
+  "document": "Payment Mandate (Direct Debit)",
+  "date": "20/03/2026",
+  "reference": "AF-2026-00417",
+  "account_holder": {
+    "name": "A Piers"
+  },
+  "instruction": {
+    "authorised_to": "Northgate Motor Finance Ltd",
+    "method": "Direct Debit",
+    "signed_by": "A. Piers",
+    "date_signed": "20/03/2026"
+  }
+}

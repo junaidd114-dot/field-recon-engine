@@ -1,0 +1,29 @@
+{
+  "document": "HP Agreement",
+  "generated_by": "Northgate Motor Finance Ltd",
+  "agreement_reference": "HP-2026-00417",
+  "date": "20/03/2026",
+  "hirer_details": {
+    "full_name": "Adam James Piers",
+    "date_of_birth": "15/03/1988",
+    "address": "14 Birchwood Lane, Solihull, B91 3QR"
+  },
+  "vehicle_details": {
+    "make_model": "Ford Focus ST-Line 1.0T EcoBoost",
+    "year": "2021",
+    "registration": "WR21 XYZ"
+  },
+  "financial_details": {
+    "cash_price": "£14,000",
+    "deposit": "£1,500",
+    "advance_amount_financed": "£12,500",
+    "monthly_payment": "£287.43",
+    "total_amount_payable": "£17,245.80",
+    "apr": "9.9%",
+    "term": "48 months",
+    "first_payment_date": "01/05/2026"
+  },
+  "dealer": {
+    "dealer_name": "Midland Motor Group"
+  }
+}

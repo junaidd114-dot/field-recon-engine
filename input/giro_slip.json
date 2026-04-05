@@ -1,0 +1,10 @@
+{
+  "document": "Giro Slip",
+  "from": "Midland Motor Group Ltd",
+  "date": "19/03/2026",
+  "payee_bank_details": {
+    "payee_name": "Midland Motor Group Ltd",
+    "sort_code": "204518",
+    "account_number": "41839205"
+  }
+}

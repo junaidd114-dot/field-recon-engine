@@ -1,0 +1,39 @@
+{
+  "document": "Purchase Invoice",
+  "data": {
+    "invoice_reference": "MCD-2026-0892",
+    "date": "19/03/2026",
+    "dealer": {
+      "name": "Midland Cars Direct"
+    },
+    "customer": {
+      "name": "A J Piers",
+      "address": "14 Birchwood Ln, Solihull, B91 3QR"
+    },
+    "vehicle": {
+      "make_model": "Ford Focus ST-Line",
+      "registration": "WR21 XYZ",
+      "mileage": "28,400"
+    },
+    "financial": {
+      "cash_price": "£14,000",
+      "deposit": "£1,500",
+      "amount_to_finance": "£12,500",
+      "line_items": [
+        { "description": "Vehicle price", "amount": "£14,000" },
+        { "description": "Administration fee", "amount": "£295" },
+        { "description": "Delivery charge", "amount": "£150" }
+      ],
+      "line_items_total": "£14,445",
+      "extras": {
+        "admin_fee": "£295",
+        "delivery_charge": "£150"
+      },
+      "vat_applicable": false,
+      "vat_amount": null,
+      "vat_registration_number": null
+    },
+    "finance_company": "Northgate Motor Finance Ltd",
+    "trade_sale": false
+  }
+}
