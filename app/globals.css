@@ -18,6 +18,12 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
+  /* Status colours */
+  --color-status-warning: var(--status-warning);
+  --color-status-success: var(--status-success);
+  --color-status-info: var(--status-info);
+  /* Sidebar muted text */
+  --color-sidebar-muted: var(--sidebar-muted);
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
@@ -73,14 +79,21 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Status colours */
+  --status-warning: oklch(0.65 0.15 55);
+  --status-success: oklch(0.52 0.12 155);
+  --status-info: oklch(0.52 0.13 295);
+
+  /* Sidebar — blue theme matching dealflow-dashboard */
+  --sidebar: oklch(0.40 0.10 250);
+  --sidebar-foreground: oklch(0.90 0.02 250);
+  --sidebar-primary: oklch(0.98 0 0);
+  --sidebar-primary-foreground: oklch(0.40 0.10 250);
+  --sidebar-accent: oklch(0.46 0.09 250);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.48 0.08 250);
+  --sidebar-ring: oklch(0.98 0 0);
+  --sidebar-muted: oklch(0.72 0.06 250);
 }
 
 .dark {
@@ -127,4 +140,11 @@
   html {
     @apply font-sans;
   }
+}
+
+@layer utilities {
+  .kpi-gradient-1 { background: oklch(0.40 0.10 250); }
+  .kpi-gradient-2 { background: oklch(0.50 0.09 250); }
+  .kpi-gradient-3 { background: oklch(0.58 0.08 250); }
+  .kpi-gradient-4 { background: oklch(0.67 0.07 250); }
 }
