@@ -3,10 +3,8 @@
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { AlertTriangle, AlertCircle, Info, ArrowRight, Bot, User, Building2, Cpu } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { AgentChatButton } from "@/components/AgentChatButton";
 import { DealTopBanner } from "@/components/DealTopBanner";
 import { getDealById } from "@/lib/data/deals";

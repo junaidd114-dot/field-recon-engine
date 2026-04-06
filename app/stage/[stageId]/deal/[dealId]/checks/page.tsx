@@ -18,7 +18,7 @@ import { DealTopBanner } from "@/components/DealTopBanner";
 import { getDealById } from "@/lib/data/deals";
 import { getDealDetail } from "@/lib/data/deal-detail";
 import { getChecksForStage, getChecksByCategory, categoryLabels, matchTypeLabels } from "@/lib/data/checks";
-import type { DealCheck, CheckCategory, CheckStatus } from "@/lib/data/checks";
+import type { CheckCategory, CheckStatus } from "@/lib/data/checks";
 
 const categoryIconMap: Record<CheckCategory, typeof FileCheck> = {
   doc_validation: FileCheck,
