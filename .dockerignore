@@ -1,0 +1,10 @@
+node_modules
+.next
+infra
+input
+.git
+.gitignore
+*.md
+docs
+npm-debug.log*
+.env*

@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# field-recon-engine
 
-## Getting Started
+A frontend demo for an automated deal-checking system used by a UK motor finance company. When a dealer submits a vehicle finance deal, a pack of documents arrives (broker application, HP agreement, purchase invoice, supplier declaration, payment mandate, giro slip, funds form). This app visualises the verification process — surfacing which fields match, which conflict, and which checks fail across the document pack for a given deal.
 
-First, run the development server:
+The demo deal is **AF-2026-00417** (customer Adam Piers, Ford Focus ST-Line, Midland Motor Group).
+
+## Stack
+
+- **Next.js 16** (App Router) with TypeScript
+- **Tailwind CSS** + **shadcn/ui**
+- **Zod** for schema validation
+- Data source: static JSON files in `input/`
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build
+npm run lint    # ESLint
+npx tsc --noEmit  # type-check only
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+The app runs on **Google Cloud Run**, managed with Terraform.
 
-To learn more about Next.js, take a look at the following resources:
+### First-time setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Authenticate with GCP
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Install Terraform >= 1.5
+# https://developer.hashicorp.com/terraform/install
 
-## Deploy on Vercel
+# Configure deploy environment
+cp .env.deploy.example .env.deploy
+# Edit .env.deploy and set PROJECT_ID
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+bash deploy.sh
+```
+
+This will:
+1. Provision Artifact Registry (if not already created)
+2. Build and push the Docker image
+3. Apply Terraform to deploy/update the Cloud Run service
+
+The service URL is stable across deploys and printed at the end of each run.
+
+### Subsequent deploys
+
+Bump `TAG` in `.env.deploy` (e.g. `v2`, `v3`) and re-run `deploy.sh`.
