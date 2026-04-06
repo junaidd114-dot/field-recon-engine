@@ -12,6 +12,9 @@
 #   export REGION=europe-west1   # optional, defaults to europe-west1
 #   export TAG=v1.0.0            # optional, defaults to 'latest'
 #   bash deploy.sh
+#
+# Note: terraform apply will display a plan and prompt for approval.
+#       Review the plan and type 'yes' to proceed with deployment.
 
 set -euo pipefail
 
