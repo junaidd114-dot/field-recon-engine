@@ -1,6 +1,7 @@
 node_modules
 .next
 infra
+input
 .git
 .gitignore
 *.md

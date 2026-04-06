@@ -34,6 +34,7 @@ echo "==> Applying Terraform..."
 cd "$(dirname "$0")/infra"
 terraform init -input=false
 terraform apply \
+  -input=false \
   -var="image_tag=${IMAGE}" \
   -var="project_id=${PROJECT_ID}" \
   -var="region=${REGION}"
