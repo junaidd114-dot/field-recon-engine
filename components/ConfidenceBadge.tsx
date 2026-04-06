@@ -26,7 +26,7 @@ export function ConfidenceBadge({ confidence, size = "sm", showLabel = false, cl
 
   return (
     <Tooltip>
-      <TooltipTrigger render={<div />} className={cn("inline-flex items-center gap-1.5 cursor-default", className)}>
+      <TooltipTrigger render={<div tabIndex={0} />} className={cn("inline-flex items-center gap-1.5 cursor-default", className)}>
           <div className={cn("rounded-full bg-muted overflow-hidden", barWidth, barHeight)}>
             <div
               className={cn("h-full rounded-full transition-all", level.bg)}

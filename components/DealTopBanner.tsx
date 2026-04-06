@@ -50,6 +50,7 @@ export function DealTopBanner({ deal, team, issues }: DealTopBannerProps) {
   const totalCount = issues.length;
 
   const navigateToIssue = (issue: DealIssue) => {
+    if (!stageId || !dealId) return;
     const route = sectionRouteMap[issue.section] ?? "";
     router.push(route ? `${basePath}/${route}` : basePath);
   };

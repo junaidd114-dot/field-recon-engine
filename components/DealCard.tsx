@@ -14,10 +14,10 @@ interface DealCardProps {
 }
 
 export function DealCard({ title, count, deals, icon, accentColor }: DealCardProps) {
-  const sorted = [...deals].sort((a, b) => b.ageInDays - a.ageInDays);
   const router = useRouter();
   const params = useParams<{ stageId: string }>();
   const stageId = params?.stageId;
+  const sorted = [...deals].sort((a, b) => b.ageInDays - a.ageInDays);
 
   return (
     <div className="bg-card rounded-xl border border-border shadow-sm flex flex-col h-full">
@@ -50,7 +50,7 @@ export function DealCard({ title, count, deals, icon, accentColor }: DealCardPro
                 <span className="font-mono text-xs text-muted-foreground">{deal.id}</span>
                 {deal.workedOnBefore && (
                   <Tooltip>
-                    <TooltipTrigger render={<span />} className="inline-flex">
+                    <TooltipTrigger render={<span tabIndex={0} />} className="inline-flex">
                       <History className="h-3.5 w-3.5 text-primary" />
                     </TooltipTrigger>
                     <TooltipContent side="top" className="text-xs">
