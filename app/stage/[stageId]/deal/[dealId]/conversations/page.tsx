@@ -48,7 +48,7 @@ export default function DealConversations() {
   const isResolved = selectedThread.status === "resolved";
 
   return (
-    <div className="space-y-4 max-w-[1400px]">
+    <div className="space-y-4">
       {detail?.deal && (
         <DealTopBanner deal={detail.deal} team={detail.stage} issues={detail.issues} />
       )}
