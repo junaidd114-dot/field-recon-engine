@@ -14,7 +14,7 @@ export default function StageDashboard() {
 
   if (!deals) {
     return (
-      <div className="space-y-6 max-w-7xl">
+      <div className="space-y-6 ">
         <h2 className="text-2xl font-bold text-foreground">{label} Team</h2>
         <p className="text-muted-foreground">No data available for this team.</p>
       </div>
@@ -29,7 +29,7 @@ export default function StageDashboard() {
   ];
 
   return (
-    <div className="space-y-6 max-w-7xl">
+    <div className="space-y-6 ">
       <h2 className="text-2xl font-bold text-foreground">{label} Team</h2>
 
       {/* Top stats bar */}

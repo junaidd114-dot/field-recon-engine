@@ -47,7 +47,7 @@ export default function DealDetail() {
   const { deal, issues, timeline, aiSummary } = detail;
 
   return (
-    <div className="space-y-4 max-w-[1400px]">
+    <div className="space-y-4">
       <DealTopBanner deal={deal} team={detail.stage} issues={issues} />
 
       {/* 3-Column Layout */}
