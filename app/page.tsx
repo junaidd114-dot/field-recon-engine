@@ -28,7 +28,7 @@ const accountsData = [
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-6 max-w-7xl">
+    <div className="space-y-6">
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
