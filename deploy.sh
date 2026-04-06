@@ -18,6 +18,12 @@
 
 set -euo pipefail
 
+# Load .env.deploy if it exists (copy from .env.deploy.example and fill in values)
+if [[ -f "$(dirname "$0")/.env.deploy" ]]; then
+  # shellcheck source=/dev/null
+  source "$(dirname "$0")/.env.deploy"
+fi
+
 PROJECT_ID=${PROJECT_ID:?Error: PROJECT_ID environment variable must be set}
 REGION=${REGION:-europe-west1}
 TAG=${TAG:-latest}
