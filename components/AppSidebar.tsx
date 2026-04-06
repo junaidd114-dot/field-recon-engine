@@ -151,6 +151,7 @@ export function AppSidebar() {
                           render={
                             <NavLink
                               href={sectionPath}
+                              end={section.hash === "summary"}
                               className="text-sidebar-foreground hover:bg-sidebar-accent"
                               activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
                             />
