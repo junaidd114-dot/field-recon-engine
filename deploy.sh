@@ -18,10 +18,12 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 # Load .env.deploy if it exists (copy from .env.deploy.example and fill in values)
-if [[ -f "$(dirname "$0")/.env.deploy" ]]; then
+if [[ -f "${SCRIPT_DIR}/.env.deploy" ]]; then
   # shellcheck source=/dev/null
-  source "$(dirname "$0")/.env.deploy"
+  source "${SCRIPT_DIR}/.env.deploy"
 fi
 
 PROJECT_ID=${PROJECT_ID:?Error: PROJECT_ID environment variable must be set}
@@ -30,7 +32,7 @@ TAG=${TAG:-latest}
 
 IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/field-recon-engine/app:${TAG}"
 
-INFRA_DIR="$(dirname "$0")/infra"
+INFRA_DIR="${SCRIPT_DIR}/infra"
 TF_VARS="-var=project_id=${PROJECT_ID} -var=region=${REGION}"
 
 echo "==> Provisioning Artifact Registry..."
@@ -44,7 +46,7 @@ terraform apply -input=false -auto-approve \
   ${TF_VARS}
 
 echo "==> Building image: ${IMAGE}"
-cd "$(dirname "$0")"
+cd "${SCRIPT_DIR}"
 docker build -t "${IMAGE}" .
 
 echo "==> Pushing image to Artifact Registry..."
