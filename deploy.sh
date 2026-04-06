@@ -30,20 +30,31 @@ TAG=${TAG:-latest}
 
 IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/field-recon-engine/app:${TAG}"
 
+INFRA_DIR="$(dirname "$0")/infra"
+TF_VARS="-var=project_id=${PROJECT_ID} -var=region=${REGION}"
+
+echo "==> Provisioning Artifact Registry..."
+cd "${INFRA_DIR}"
+terraform init -input=false
+# shellcheck disable=SC2086
+terraform apply -input=false -auto-approve \
+  -target=google_project_service.artifactregistry \
+  -target=google_artifact_registry_repository.docker \
+  ${TF_VARS}
+
 echo "==> Building image: ${IMAGE}"
+cd "$(dirname "$0")"
 docker build -t "${IMAGE}" .
 
 echo "==> Pushing image to Artifact Registry..."
 docker push "${IMAGE}"
 
-echo "==> Applying Terraform..."
-cd "$(dirname "$0")/infra"
-terraform init -input=false
+echo "==> Deploying to Cloud Run..."
+cd "${INFRA_DIR}"
 terraform apply \
   -input=false \
   -var="image_tag=${IMAGE}" \
-  -var="project_id=${PROJECT_ID}" \
-  -var="region=${REGION}"
+  ${TF_VARS}
 
 echo ""
 echo "==> Deployed. Service URL:"
