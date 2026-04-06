@@ -40,6 +40,7 @@ terraform init -input=false
 terraform apply -input=false -auto-approve \
   -target=google_project_service.artifactregistry \
   -target=google_artifact_registry_repository.docker \
+  -var="image_tag=${IMAGE}" \
   ${TF_VARS}
 
 echo "==> Building image: ${IMAGE}"
